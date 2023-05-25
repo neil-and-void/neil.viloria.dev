@@ -46,7 +46,7 @@ export default function Home() {
 
               <div className=" text-center pb-8">
                 <div>neilzoncviloria@gmail.com</div>
-                <div>Edmonton, Ab &#127464;&#127462;</div>
+                <div>Edmonton, Ab {'\u{1F1E8}\u{1F1E6}'}</div>
               </div>
 
               <div className="flex justify-center gap-2 text-xs text-gray-secondary pb-16">
@@ -77,7 +77,7 @@ export default function Home() {
               </div>
 
               <button className="w-full rounded-full text-gray-primary bg-primary text-xs py-3 hover:bg-primary/80">
-                Let's Chat!
+                Let&apos;s Chat!
               </button>
             </div>
           </div>
@@ -126,7 +126,7 @@ export default function Home() {
               About
             </div>
             <h2 className="text-4xl">
-              I've always <span className="text-primary">built</span> and{' '}
+              I&apos;ve always <span className="text-primary">built</span> and{' '}
               <span className="text-primary">tinkered</span> with computers
             </h2>
             <div className="w-3/4 text-gray-secondary">
@@ -199,8 +199,8 @@ export default function Home() {
               My Skills
             </div>
             <h2 className="text-4xl">
-              <span className="text-primary">Technologies</span> I've worked
-              with
+              <span className="text-primary">Technologies</span> I&apos;ve
+              worked with
             </h2>
             <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
               <div className="flex flex-col w-fit items-center text-center gap-4">
@@ -329,13 +329,13 @@ export default function Home() {
       <footer className="bg-[#141315]">
         <div className="flex justify-center flex-col items-center py-24">
           <h4 className="text-4xl pb-4">
-            Impressed? <span className="text-primary">Let's talk</span>.
+            Impressed? <span className="text-primary">Let&apos;s talk</span>.
           </h4>
           <button className="rounded-full text-gray-primary bg-primary text-xs py-3 hover:bg-primary/80 px-4">
-            Let's Chat!
+            Let&apos;s Chat!
           </button>
         </div>
-        <div className="flex justify-center">&#127464;&#127462;</div>
+        <div className="flex justify-center">{'\u{1F1E8}\u{1F1E6}'}</div>
       </footer>
     </div>
   );
