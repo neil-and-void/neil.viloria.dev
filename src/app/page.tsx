@@ -62,14 +62,14 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="scroll-smooth">
+    <div>
       <Script
         src="https://kit.fontawesome.com/e8971d5674.js"
         crossOrigin="anonymous"
       ></Script>
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr] scroll-smooth">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr] relative">
         {/* side bar */}
-        <div className="fixed h-screen md:flex flex-col justify-center right-0 pr-7 hidden">
+        <div className="fixed h-screen md:flex flex-col justify-start pt-4 right-0 pr-7 hidden top-0 w-fit">
           <div className="flex flex-col rounded-full border border-gray-tertiary p-2 gap-6 items-center text-sm text-gray-secondary">
             {sections.map((section) => {
               return (
@@ -149,7 +149,7 @@ export default function Home() {
         </div>
 
         {/* content */}
-        <div className="px-4 md:max-w-[1024px] justify-self-center md:px-24">
+        <div className="px-4 md:max-w-[1024px] justify-self-center md:px-24 relative">
           {/* intro */}
           <section
             id="intro"
@@ -170,13 +170,13 @@ export default function Home() {
               do.
             </div>
 
-            <Link
+            <a
               className="w-32 h-32 border border-gray-tertiary rounded-full self-end flex flex-col justify-center items-center hover:border-primary hover:text-white/80 gap-2"
               href="#projects"
             >
               Projects
               <i className="fa-solid fa-arrow-down"></i>
-            </Link>
+            </a>
 
             <div className="flex gap-12">
               <div>
