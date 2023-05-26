@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
+
 import Script from 'next/script';
 
 export default function Home() {
@@ -10,20 +10,28 @@ export default function Home() {
         src="https://kit.fontawesome.com/e8971d5674.js"
         crossOrigin="anonymous"
       ></Script>
-      <Head>
-        <title>My page title</title>
-        <meta property="og:title" content="My page title" key="title" />
-      </Head>
       <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr]">
         {/* side bar */}
         <div className="fixed h-screen md:flex flex-col justify-center right-0 pr-7 hidden">
           <div className="flex flex-col rounded-full border border-gray-tertiary p-2 gap-6 items-center text-sm text-gray-secondary">
-            <i className="fa-solid fa-star hover:text-primary cursor-pointer"></i>
-            <i className="fa-solid fa-address-card hover:text-primary cursor-pointer"></i>
-            <i className="fa-solid fa-file hover:text-primary cursor-pointer"></i>
-            <i className="fa-solid fa-chart-simple hover:text-primary cursor-pointer"></i>
-            <i className="fa-solid fa-folder hover:text-primary cursor-pointer"></i>
-            <i className="fa-brands fa-osi hover:text-primary cursor-pointer"></i>
+            <a href="#intro">
+              <i className="fa-solid fa-star hover:text-primary cursor-pointer"></i>
+            </a>
+            <a href="#about">
+              <i className="fa-solid fa-address-card hover:text-primary cursor-pointer"></i>
+            </a>
+            <a href="#resume">
+              <i className="fa-solid fa-file hover:text-primary cursor-pointer"></i>
+            </a>
+            <a href="#skills">
+              <i className="fa-solid fa-chart-simple hover:text-primary cursor-pointer"></i>
+            </a>
+            <a href="#projects">
+              <i className="fa-solid fa-folder hover:text-primary cursor-pointer"></i>
+            </a>
+            <a href="#open-source">
+              <i className="fa-brands fa-osi hover:text-primary cursor-pointer"></i>
+            </a>
           </div>
         </div>
 
@@ -109,10 +117,11 @@ export default function Home() {
             </div>
 
             <a
-              className="w-32 h-32 border border-gray-tertiary rounded-full self-end flex justify-center items-center hover:border-primary hover:text-white/80"
+              className="w-32 h-32 border border-gray-tertiary rounded-full self-end flex flex-col justify-center items-center hover:border-primary hover:text-white/80 gap-2"
               href="#projects"
             >
               Projects
+              <i className="fa-solid fa-arrow-down"></i>
             </a>
 
             <div className="flex gap-12">
@@ -125,7 +134,7 @@ export default function Home() {
 
               <div>
                 <div className="text-6xl text-primary">4</div>
-                <div className="text-gray-secondary text-xs">
+                <div className="text-gray-secondary text-xs w-[100px]">
                   personal projects shipped
                 </div>
               </div>
