@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import Script from 'next/script';
 
@@ -10,28 +11,28 @@ export default function Home() {
         src="https://kit.fontawesome.com/e8971d5674.js"
         crossOrigin="anonymous"
       ></Script>
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr]">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr] scroll-smooth">
         {/* side bar */}
         <div className="fixed h-screen md:flex flex-col justify-center right-0 pr-7 hidden">
           <div className="flex flex-col rounded-full border border-gray-tertiary p-2 gap-6 items-center text-sm text-gray-secondary">
-            <a href="#intro">
+            <Link href="#intro">
               <i className="fa-solid fa-star hover:text-primary cursor-pointer"></i>
-            </a>
-            <a href="#about">
+            </Link>
+            <Link href="#about">
               <i className="fa-solid fa-address-card hover:text-primary cursor-pointer"></i>
-            </a>
-            <a href="#resume">
+            </Link>
+            <Link href="#resume">
               <i className="fa-solid fa-file hover:text-primary cursor-pointer"></i>
-            </a>
-            <a href="#skills">
+            </Link>
+            <Link href="#skills">
               <i className="fa-solid fa-chart-simple hover:text-primary cursor-pointer"></i>
-            </a>
-            <a href="#projects">
+            </Link>
+            <Link href="#projects">
               <i className="fa-solid fa-folder hover:text-primary cursor-pointer"></i>
-            </a>
-            <a href="#open-source">
+            </Link>
+            <Link href="#open-source">
               <i className="fa-brands fa-osi hover:text-primary cursor-pointer"></i>
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -108,21 +109,23 @@ export default function Home() {
               Intro
             </div>
             <h1 className="text-5xl">
-              Hi my name is <span className="text-primary">Neil</span>, I build
-              beautiful, performant software
+              <div>
+                Hi my name is <span className="text-primary">Neil</span>.
+              </div>
+              <div>I build beautiful, performant software</div>
             </h1>
             <div className="text-gray-secondary text-sm max-w-sm">
               I build cool and performant software and I absolutely love what I
               do.
             </div>
 
-            <a
+            <Link
               className="w-32 h-32 border border-gray-tertiary rounded-full self-end flex flex-col justify-center items-center hover:border-primary hover:text-white/80 gap-2"
               href="#projects"
             >
               Projects
               <i className="fa-solid fa-arrow-down"></i>
-            </a>
+            </Link>
 
             <div className="flex gap-12">
               <div>
@@ -430,9 +433,9 @@ export default function Home() {
                       href="https://cmput401.ca/projects/a3bc8e93-1275-434e-9e88-f4af38bb276c"
                       target="_blank"
                       rel="noreferrer"
-                      className="rounded-full bg-gray-primary px-2 flex items-center hover:text-white/80 py-1 gap-1"
+                      className="rounded-full bg-white text-gray-primary px-2 flex items-center hover:text-gray-primary/80 py-1 gap-1"
                     >
-                      <i className="fa-solid fa-film"></i>
+                      <i className="fa-solid fa-circle-info"></i>
                       About
                     </a>
                   </div>
@@ -469,7 +472,7 @@ export default function Home() {
                       target="_blank"
                       rel="noreferrer"
                       href="https://www.codeedit.app/"
-                      className="rounded-full bg-gray-primary px-2 flex items-center hover:text-white/80 py-1 gap-1"
+                      className="rounded-full bg-white text-gray-primary px-2 flex items-center hover:text-gray-primary/80 py-1 gap-1"
                     >
                       <i className="fa-solid fa-link"></i>
                       Code Edit
