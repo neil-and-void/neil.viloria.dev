@@ -295,6 +295,10 @@ export default function Home() {
                   onscreen: {
                     y: 0,
                     opacity: 1,
+                    transition: {
+                      type: 'spring',
+                      duration: 0.5,
+                    },
                   },
                 }}
               >
@@ -313,6 +317,10 @@ export default function Home() {
                   onscreen: {
                     y: 0,
                     opacity: 1,
+                    transition: {
+                      type: 'spring',
+                      duration: 0.5,
+                    },
                   },
                 }}
               >
@@ -358,8 +366,15 @@ export default function Home() {
             <motion.h2
               className="text-4xl"
               variants={{
-                offscreen: { opacity: 0 },
-                onscreen: { opacity: 1 },
+                offscreen: { opacity: 0, y: 200 },
+                onscreen: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    type: 'linear',
+                    duration: 0.5,
+                  },
+                },
               }}
             >
               I&apos;ve always <span className="text-primary">built</span> and{' '}
@@ -368,8 +383,15 @@ export default function Home() {
             <motion.div
               className="w-3/4 text-gray-secondary"
               variants={{
-                offscreen: { opacity: 0 },
-                onscreen: { opacity: 1 },
+                offscreen: { opacity: 0, y: 200 },
+                onscreen: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    type: 'linear',
+                    duration: 0.5,
+                  },
+                },
               }}
             >
               From a young age, my love for computers grew through activities
@@ -655,6 +677,20 @@ export default function Home() {
                 </div>
                 <div className="text-xs">Postgres</div>
               </motion.div>
+              <motion.div
+                className="flex flex-col w-fit items-center text-center gap-4"
+                variants={techGridVariants}
+              >
+                <div className=" rounded-full flex flex-col justify-center  items-center aspect-square p-4 hover:border-primary">
+                  <Image
+                    src="/graphql.png"
+                    alt="graphql"
+                    height={48}
+                    width={48}
+                  />
+                </div>
+                <div className="text-xs">GraphQL</div>
+              </motion.div>
             </motion.div>
           </section>
 
@@ -702,7 +738,7 @@ export default function Home() {
                     y: 0,
                     transition: {
                       type: 'linear',
-                      duration: 0.5,
+                      duration: 0.6,
                     },
                   },
                 }}
@@ -745,7 +781,7 @@ export default function Home() {
                     y: 0,
                     transition: {
                       type: 'linear',
-                      duration: 0.5,
+                      duration: 0.6,
                     },
                   },
                 }}
@@ -807,7 +843,7 @@ export default function Home() {
                     y: 0,
                     transition: {
                       type: 'linear',
-                      duration: 0.5,
+                      duration: 0.6,
                     },
                   },
                 }}
@@ -851,7 +887,7 @@ export default function Home() {
                     y: 0,
                     transition: {
                       type: 'linear',
-                      duration: 0.5,
+                      duration: 0.6,
                     },
                   },
                 }}
