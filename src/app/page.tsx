@@ -1,12 +1,68 @@
-import Head from 'next/head';
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 import Script from 'next/script';
+import clsx from 'clsx';
 
 export default function Home() {
+  const observer = useRef<IntersectionObserver>();
+  const [activeId, setActiveId] = useState<string>('');
+
+  const sections = [
+    {
+      id: 'intro',
+      icon: <i className="fa-solid fa-star"></i>,
+    },
+    {
+      id: 'about',
+      icon: <i className="fa-solid fa-address-card"></i>,
+    },
+    {
+      id: 'resume',
+      icon: <i className="fa-solid fa-file"></i>,
+    },
+    {
+      id: 'skills',
+      icon: <i className="fa-solid fa-chart-simple"></i>,
+    },
+    {
+      id: 'projects',
+      icon: <i className="fa-solid fa-folder"></i>,
+    },
+    {
+      id: 'open-source',
+      icon: <i className="fa-brands fa-osi"></i>,
+    },
+  ];
+
+  useEffect(() => {
+    const headings = sections.map((sections) => {
+      return document.getElementById(sections.id);
+    });
+
+    observer.current = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((e) => {
+          if (e.intersectionRatio > 0.5) {
+            setActiveId(e.target.id);
+          }
+        });
+      },
+      {
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
+
+    headings.forEach((e) => e && observer.current?.observe(e));
+
+    return () => observer.current?.disconnect();
+  }, []);
+
   return (
-    <div>
+    <div className="scroll-smooth">
       <Script
         src="https://kit.fontawesome.com/e8971d5674.js"
         crossOrigin="anonymous"
@@ -15,24 +71,19 @@ export default function Home() {
         {/* side bar */}
         <div className="fixed h-screen md:flex flex-col justify-center right-0 pr-7 hidden">
           <div className="flex flex-col rounded-full border border-gray-tertiary p-2 gap-6 items-center text-sm text-gray-secondary">
-            <Link href="#intro">
-              <i className="fa-solid fa-star hover:text-primary cursor-pointer"></i>
-            </Link>
-            <Link href="#about">
-              <i className="fa-solid fa-address-card hover:text-primary cursor-pointer"></i>
-            </Link>
-            <Link href="#resume">
-              <i className="fa-solid fa-file hover:text-primary cursor-pointer"></i>
-            </Link>
-            <Link href="#skills">
-              <i className="fa-solid fa-chart-simple hover:text-primary cursor-pointer"></i>
-            </Link>
-            <Link href="#projects">
-              <i className="fa-solid fa-folder hover:text-primary cursor-pointer"></i>
-            </Link>
-            <Link href="#open-source">
-              <i className="fa-brands fa-osi hover:text-primary cursor-pointer"></i>
-            </Link>
+            {sections.map((section) => {
+              return (
+                <a
+                  href={`#${section.id}`}
+                  key={section.id}
+                  className={clsx('hover:text-primary duration-300', {
+                    'text-primary': section.id === activeId,
+                  })}
+                >
+                  {section.icon}
+                </a>
+              );
+            })}
           </div>
         </div>
 
