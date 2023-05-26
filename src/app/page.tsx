@@ -592,7 +592,7 @@ export default function Home() {
                 variants={techGridVariants}
               >
                 <div className=" rounded-full flex flex-col justify-center  items-center aspect-square p-4 hover:border-primary">
-                  <Image src="/next.png" alt="next" height={48} width={48} />
+                  <Image src="/nextjs.png" alt="next" height={48} width={48} />
                 </div>
                 <div className="text-xs">NextJS</div>
               </motion.div>
