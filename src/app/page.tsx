@@ -706,28 +706,12 @@ export default function Home() {
             <h3 className="text-4xl pb-4">
               My <span className="text-primary">Projects</span>
             </h3>
-            <motion.div
-              className="grid md:grid-cols-2 gap-4"
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true }}
-              variants={{
-                offscreen: {
-                  opacity: 0,
-                  y: 300,
-                },
-                onscreen: {
-                  opacity: 1,
-                  y: 0,
-                  transition: {
-                    type: 'linear',
-                    staggerChildren: 0.25,
-                  },
-                },
-              }}
-            >
+            <div className="grid md:grid-cols-2 gap-4">
               <motion.div
                 className="col-span-2 group cursor-pointer"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true }}
                 variants={{
                   offscreen: {
                     opacity: 0,
@@ -771,6 +755,9 @@ export default function Home() {
               </motion.div>
               <motion.div
                 className="col-span-2 group cursor-pointer"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true }}
                 variants={{
                   offscreen: {
                     opacity: 0,
@@ -833,6 +820,9 @@ export default function Home() {
               </motion.div>
               <motion.div
                 className="group cursor-pointer"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true }}
                 variants={{
                   offscreen: {
                     opacity: 0,
@@ -877,6 +867,9 @@ export default function Home() {
               </motion.div>
               <motion.div
                 className="group cursor-pointer"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true }}
                 variants={{
                   offscreen: {
                     opacity: 0,
@@ -919,7 +912,7 @@ export default function Home() {
                   </span>
                 </div>
               </motion.div>
-            </motion.div>
+            </div>
           </section>
 
           {/* portfolio */}
