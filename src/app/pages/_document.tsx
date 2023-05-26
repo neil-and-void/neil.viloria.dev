@@ -9,10 +9,6 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Script
-          src="https://kit.fontawesome.com/ff182a5f3e.js"
-          crossOrigin="anonymous"
-        ></Script>
         <Head>
           <link
             href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
