@@ -152,7 +152,7 @@ export default function Home() {
         </motion.div>
 
         {/* side card */}
-        <div className="p-4 justify-self-stretch md:block hidden">
+        <div className="justify-self-stretch md:block hidden">
           <SideCard />
         </div>
 

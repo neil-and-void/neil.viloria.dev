@@ -1,14 +1,10 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
-interface SideCardInterface {
-  className?: string;
-}
-
-const SideCard = ({ className = '' }: SideCardInterface) => {
+const SideCard = () => {
   return (
     <motion.div
-      className="sticky top-0 text-white"
+      className="sticky top-0 p-4 text-white"
       initial="offscreen"
       whileInView="onscreen"
       viewport={{ once: true }}
