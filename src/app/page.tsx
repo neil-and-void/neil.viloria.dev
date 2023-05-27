@@ -169,7 +169,7 @@ export default function Home() {
         {/* modal */}
         <Modal show={showCard}>
           <SideCard />
-          <div className="pt-2 flex justify-center items-center w-full">
+          <div className="flex justify-center items-center w-full">
             <button
               className="text-red-500 rounded-full text-lg bg-white aspect-square w-10 h-10 flex justify-center items-center hover:bg-white/75"
               onClick={() => setShowCard(false)}
