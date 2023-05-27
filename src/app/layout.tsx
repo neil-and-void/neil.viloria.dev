@@ -18,6 +18,7 @@ export default function RootLayout({
       <body className={inter.className}>
         {children}
         <Analytics />
+        <div id="modal" />
       </body>
     </html>
   );

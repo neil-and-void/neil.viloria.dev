@@ -2,22 +2,24 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
-
 import Script from 'next/script';
 import clsx from 'clsx';
 import { motion, Variants } from 'framer-motion';
 
+import Modal from '../components/Modal';
+import SideCard from '@/components/SideCard';
+
 const fadeBottomVariants: Variants = {
   offscreen: {
     opacity: 0,
-    y: 200,
+    y: 100,
   },
   onscreen: {
     y: 0,
     opacity: 1,
     transition: {
       type: 'linear',
-      duration: 0.5,
+      duration: 0.3,
     },
   },
 };
@@ -25,21 +27,21 @@ const fadeBottomVariants: Variants = {
 const fadeRightVariants: Variants = {
   offscreen: {
     opacity: 0,
-    x: -300,
+    x: -200,
   },
   onscreen: {
     x: 0,
     opacity: 1,
     transition: {
       type: 'linear',
-      duration: 0.8,
+      duration: 0.3,
     },
   },
 };
 
 const techGridVariants: Variants = {
   offscreen: {
-    y: 200,
+    y: 75,
     opacity: 0,
   },
   onscreen: {
@@ -47,7 +49,7 @@ const techGridVariants: Variants = {
     opacity: 1,
     transition: {
       type: 'linear',
-      duration: 0.5,
+      duration: 0.3,
     },
   },
 };
@@ -55,6 +57,7 @@ const techGridVariants: Variants = {
 export default function Home() {
   const observer = useRef<IntersectionObserver>();
   const [activeId, setActiveId] = useState<string>('');
+  const [showCard, setShowCard] = useState<boolean>(false);
 
   const sections = [
     {
@@ -91,7 +94,6 @@ export default function Home() {
     observer.current = new IntersectionObserver(
       (entries: IntersectionObserverEntry[]) => {
         entries.forEach((e) => {
-          console.log(e.target.id, e.intersectionRatio);
           if (e.intersectionRatio > 0.5) {
             setActiveId(e.target.id);
           }
@@ -112,7 +114,7 @@ export default function Home() {
       <Script
         src="https://kit.fontawesome.com/e8971d5674.js"
         crossOrigin="anonymous"
-      ></Script>
+      />
       <div className="grid grid-cols-1 md:grid-cols-[1fr_3fr] relative">
         {/* side bar */}
         <motion.div
@@ -150,85 +152,35 @@ export default function Home() {
         </motion.div>
 
         {/* side card */}
-        <motion.div
-          className="justify-self-stretch md:block hidden"
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true }}
-          variants={{
-            offscreen: {
-              opacity: 0,
-            },
-            onscreen: {
-              opacity: 1,
-              transition: {
-                type: 'linear',
-                duration: 0.5,
-              },
-            },
-          }}
-        >
-          <div className="p-4 sticky top-0">
-            <div className="sticky fiex border border-gray-tertiary h-full rounded-3xl w-full p-8">
-              <div className="flex justify-between gap-1 items-center pb-12">
-                <div className="text-3xl font-medium">Neil</div>
-                <div className="text-xs">Fullstack Engineer</div>
-              </div>
+        <div className="p-4 justify-self-stretch md:block hidden">
+          <SideCard />
+        </div>
 
-              <div className="flex justify-center pb-12">
-                <Image
-                  src="/me.png"
-                  alt="me"
-                  width={256}
-                  height={256}
-                  className=" rounded-full bg-gray-secondary/10"
-                />
-              </div>
+        {/* side card for mobile view */}
+        <div className="fixed md:hidden right-0 bottom-0 p-4 z-10">
+          <button
+            className="bg-primary rounded-full p-2 flex items-center gap-2 text-gray-primary text-sm cursor-pointer hover:bg-primary/80"
+            onClick={() => setShowCard(true)}
+          >
+            <i className="fa-solid fa-circle-info"></i>Info
+          </button>
+        </div>
 
-              <div className=" text-center pb-8">
-                <div>neilzoncviloria@gmail.com</div>
-                <div>Edmonton, Ab &#127464;&#127462;</div>
-              </div>
-
-              <div className="flex justify-center gap-2 text-sm text-gray-secondary pb-16">
-                <a
-                  href="https://github.com/neilZon"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex rounded-full justify-center items-center border border-gray-tertiary w-8 h-8 cursor-pointer hover:text-primary hover:border-primary"
-                >
-                  <i className="fa-brands fa-github"></i>
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/neilzonv/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex rounded-full justify-center items-center border border-gray-tertiary w-8 h-8 cursor-pointer hover:text-primary hover:border-primary"
-                >
-                  <i className="fa-brands fa-linkedin"></i>
-                </a>
-                <a
-                  href="https://drive.google.com/file/d/1D-gKEgBB9q__SfZ46w1tTAnS8urXOcZX/view?usp=sharing"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex rounded-full justify-center items-center border border-gray-tertiary w-8 h-8 cursor-pointer hover:text-primary hover:border-primary"
-                >
-                  <i className="fa-solid fa-file"></i>
-                </a>
-              </div>
-
-              <a
-                href="mailto: neilzoncviloria@gmail.com"
-                className="w-full rounded-full text-gray-primary bg-primary py-3 hover:bg-primary/80 flex items-center justify-center gap-2 text-sm"
-              >
-                <i className="fa-solid fa-envelope"></i> Let&apos;s Chat!
-              </a>
-            </div>
+        {/* modal */}
+        <Modal show={showCard}>
+          <SideCard />
+          <div className="pt-2 flex justify-center items-center w-full">
+            <button
+              className="text-red-500 rounded-full text-lg bg-white aspect-square w-10 h-10 flex justify-center items-center hover:bg-white/75"
+              onClick={() => setShowCard(false)}
+            >
+              <i className="fa-solid fa-xmark"></i>
+            </button>
           </div>
-        </motion.div>
+        </Modal>
 
         {/* content */}
-        <div className="px-4 md:max-w-[1024px] justify-self-center md:px-24 relative">
+        <div className="px-6 md:max-w-[1024px] justify-self-center md:px-24 relative">
           {/* intro */}
           <motion.section
             id="intro"
@@ -242,7 +194,7 @@ export default function Home() {
               onscreen: {
                 opacity: 1,
                 transition: {
-                  staggerChildren: 0.25,
+                  staggerChildren: 0.15,
                 },
               },
             }}
@@ -256,6 +208,9 @@ export default function Home() {
                 },
                 onscreen: {
                   opacity: 1,
+                  transition: {
+                    duration: 0.15,
+                  },
                 },
               }}
             >
@@ -282,7 +237,7 @@ export default function Home() {
               href="#projects"
             >
               Projects
-              <i className="fa-solid fa-arrow-down"></i>
+              <i className="fa-solid fa-arrow-down text-gray-secondary"></i>
             </motion.a>
 
             <div className="flex gap-12">
@@ -297,7 +252,7 @@ export default function Home() {
                     opacity: 1,
                     transition: {
                       type: 'spring',
-                      duration: 0.5,
+                      duration: 0.3,
                     },
                   },
                 }}
@@ -319,14 +274,14 @@ export default function Home() {
                     opacity: 1,
                     transition: {
                       type: 'spring',
-                      duration: 0.5,
+                      duration: 0.3,
                     },
                   },
                 }}
               >
                 <div className="text-6xl text-primary">4</div>
                 <div className="text-gray-secondary text-xs w-[100px]">
-                  personal projects shipped
+                  projects shipped
                 </div>
               </motion.div>
             </div>
@@ -347,8 +302,8 @@ export default function Home() {
                 opacity: 1,
                 transition: {
                   type: 'linear',
-                  duration: 0.5,
-                  staggerChildren: 0.25,
+                  duration: 0.2,
+                  staggerChildren: 0.1,
                 },
               },
             }}
@@ -372,7 +327,7 @@ export default function Home() {
                   y: 0,
                   transition: {
                     type: 'linear',
-                    duration: 0.5,
+                    duration: 0.3,
                   },
                 },
               }}
@@ -389,7 +344,7 @@ export default function Home() {
                   y: 0,
                   transition: {
                     type: 'linear',
-                    duration: 0.5,
+                    duration: 0.3,
                   },
                 },
               }}
@@ -413,102 +368,170 @@ export default function Home() {
               <i className="fa-solid fa-file"></i>
               Resume
             </div>
-            <motion.div
-              initial="offscreen"
-              whileInView="onscreen"
-              viewport={{ once: true }}
-              variants={{
-                offscreen: {
-                  opacity: 0,
-                  x: -200,
-                },
-                onscreen: {
-                  opacity: 1,
-                  x: 0,
-                  transition: {
-                    staggerChildren: 0.25,
-                  },
-                },
-              }}
-            >
-              <motion.h3
-                className="text-3xl pb-4"
-                variants={{
-                  offscreen: {
-                    opacity: 0,
-                    x: -200,
-                  },
-                  onscreen: {
-                    opacity: 1,
-                    x: 0,
-                    transition: {
-                      type: 'linear',
-                      duration: 0.75,
-                    },
-                  },
-                }}
-              >
+            <div>
+              <h3 className="text-3xl pb-4">
                 My <span className="text-primary">Experience</span>
-              </motion.h3>
+              </h3>
 
               <motion.div
                 className="border-l border-gray-tertiary py-10 pl-10 relative"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true }}
                 variants={{
                   offscreen: {
                     opacity: 0,
-                    x: -200,
                   },
                   onscreen: {
                     transition: {
                       type: 'linear',
-                      duration: 0.75,
+                      staggerChildren: 0.1,
                     },
                     opacity: 1,
-                    x: 0,
                   },
                 }}
               >
-                <div className="absolute -left-1 -top-2 flex items-center">
+                <motion.div
+                  className="absolute -left-1 -top-2 flex items-center"
+                  variants={{
+                    offscreen: {
+                      opacity: 0,
+                      y: 100,
+                    },
+                    onscreen: {
+                      transition: {
+                        type: 'linear',
+                        duration: 0.3,
+                      },
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                >
                   <div className="h-2 w-2 bg-gray-secondary rounded-full" />
                   <div className="pl-10 text-sm text-gray-secondary">
                     April 2022 - August 2022
                   </div>
-                </div>
-                <div>Dapper Labs</div>
-                <div className="text-xs text-gray-secondary">
+                </motion.div>
+                <motion.div
+                  variants={{
+                    offscreen: {
+                      opacity: 0,
+                      y: 100,
+                    },
+                    onscreen: {
+                      transition: {
+                        type: 'linear',
+                        duration: 0.3,
+                      },
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                >
+                  Dapper Labs
+                </motion.div>
+                <motion.div
+                  className="text-xs text-gray-secondary"
+                  variants={{
+                    offscreen: {
+                      opacity: 0,
+                      y: 100,
+                    },
+                    onscreen: {
+                      transition: {
+                        type: 'linear',
+                        duration: 0.3,
+                      },
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                >
                   Vancouver, Canada
-                </div>
+                </motion.div>
               </motion.div>
 
               <motion.div
                 className="border-l border-gray-tertiary py-10 pl-10 relative"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true }}
                 variants={{
                   offscreen: {
                     opacity: 0,
-                    x: -200,
                   },
                   onscreen: {
-                    opacity: 1,
                     transition: {
                       type: 'linear',
-                      duration: 0.75,
+                      staggerChildren: 0.1,
                     },
-                    x: 0,
+                    opacity: 1,
                   },
                 }}
               >
-                <div className="absolute -left-1 -top-2 flex items-center">
+                <motion.div
+                  className="absolute -left-1 -top-2 flex items-center"
+                  variants={{
+                    offscreen: {
+                      opacity: 0,
+                      y: 100,
+                    },
+                    onscreen: {
+                      transition: {
+                        type: 'linear',
+                        duration: 0.3,
+                      },
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                >
                   <div className="h-2 w-2 bg-gray-secondary rounded-full" />
                   <div className="pl-10 text-sm text-gray-secondary">
                     August 2020 - August 2021
                   </div>
-                </div>
-                <div>MoveMate</div>
-                <div className="text-xs text-gray-secondary">
+                </motion.div>
+                <motion.div
+                  variants={{
+                    offscreen: {
+                      opacity: 0,
+                      y: 100,
+                    },
+                    onscreen: {
+                      transition: {
+                        type: 'linear',
+                        duration: 0.3,
+                      },
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                >
+                  MoveMate
+                </motion.div>
+                <motion.div
+                  className="text-xs text-gray-secondary"
+                  variants={{
+                    offscreen: {
+                      opacity: 0,
+                      y: 100,
+                    },
+                    onscreen: {
+                      transition: {
+                        type: 'linear',
+                        duration: 0.3,
+                      },
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                >
                   Montreal, Canada
-                </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
+            </div>
+
             <motion.div
               initial="offscreen"
               whileInView="onscreen"
@@ -516,15 +539,13 @@ export default function Home() {
               variants={{
                 offscreen: {
                   opacity: 0,
-                  x: -200,
                 },
                 onscreen: {
-                  opacity: 1,
-                  x: 0,
                   transition: {
                     type: 'linear',
-                    duration: 0.75,
+                    staggerChildren: 0.1,
                   },
+                  opacity: 1,
                 },
               }}
             >
@@ -532,17 +553,66 @@ export default function Home() {
                 My <span className="text-primary">Education</span>
               </h3>
               <div className="border-l border-gray-tertiary py-10 pl-10 relative">
-                <div className="absolute -left-1 -top-2 flex items-center">
+                <motion.div
+                  className="absolute -left-1 -top-2 flex items-center"
+                  variants={{
+                    offscreen: {
+                      opacity: 0,
+                      y: 100,
+                    },
+                    onscreen: {
+                      transition: {
+                        type: 'linear',
+                        duration: 0.3,
+                      },
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                >
                   <div className="h-2 w-2 bg-gray-secondary rounded-full" />
                   <div className="pl-10 text-sm text-gray-secondary">
                     Graduated 2023
                   </div>
-                </div>
+                </motion.div>
 
-                <div>University of Alberta</div>
-                <div className="text-xs text-gray-secondary">
+                <motion.div
+                  variants={{
+                    offscreen: {
+                      opacity: 0,
+                      y: 100,
+                    },
+                    onscreen: {
+                      transition: {
+                        type: 'linear',
+                        duration: 0.3,
+                      },
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                >
+                  University of Alberta
+                </motion.div>
+                <motion.div
+                  className="text-xs text-gray-secondary"
+                  variants={{
+                    offscreen: {
+                      opacity: 0,
+                      y: 100,
+                    },
+                    onscreen: {
+                      transition: {
+                        type: 'linear',
+                        duration: 0.3,
+                      },
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                >
                   Major Computer Science, Minor Math
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           </section>
@@ -573,7 +643,7 @@ export default function Home() {
                   opacity: 1,
                   transition: {
                     when: 'beforeChildren',
-                    staggerChildren: 0.25,
+                    staggerChildren: 0.05,
                   },
                 },
               }}
@@ -715,14 +785,14 @@ export default function Home() {
                 variants={{
                   offscreen: {
                     opacity: 0,
-                    y: 300,
+                    y: 100,
                   },
                   onscreen: {
                     opacity: 1,
                     y: 0,
                     transition: {
                       type: 'linear',
-                      duration: 0.6,
+                      duration: 0.2,
                     },
                   },
                 }}
@@ -761,14 +831,14 @@ export default function Home() {
                 variants={{
                   offscreen: {
                     opacity: 0,
-                    y: 300,
+                    y: 100,
                   },
                   onscreen: {
                     opacity: 1,
                     y: 0,
                     transition: {
                       type: 'linear',
-                      duration: 0.6,
+                      duration: 0.2,
                     },
                   },
                 }}
@@ -819,21 +889,21 @@ export default function Home() {
                 </div>
               </motion.div>
               <motion.div
-                className="group cursor-pointer"
+                className="group cursor-pointer justify-self-stretch"
                 initial="offscreen"
                 whileInView="onscreen"
                 viewport={{ once: true }}
                 variants={{
                   offscreen: {
                     opacity: 0,
-                    y: 300,
+                    y: 100,
                   },
                   onscreen: {
                     opacity: 1,
                     y: 0,
                     transition: {
                       type: 'linear',
-                      duration: 0.6,
+                      duration: 0.2,
                     },
                   },
                 }}
@@ -866,21 +936,21 @@ export default function Home() {
                 </div>
               </motion.div>
               <motion.div
-                className="group cursor-pointer"
+                className="group cursor-pointer justify-self-stretch"
                 initial="offscreen"
                 whileInView="onscreen"
                 viewport={{ once: true }}
                 variants={{
                   offscreen: {
                     opacity: 0,
-                    y: 300,
+                    y: 100,
                   },
                   onscreen: {
                     opacity: 1,
                     y: 0,
                     transition: {
                       type: 'linear',
-                      duration: 0.6,
+                      duration: 0.2,
                     },
                   },
                 }}
@@ -963,6 +1033,14 @@ export default function Home() {
                       <i className="fa-solid fa-link"></i>
                       Code Edit
                     </a>
+                    <a
+                      href="https://github.com/CodeEditApp/CodeEdit/pulls?q=is%3Apr+is%3Aclosed+neilzon"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full bg-white text-gray-primary px-2 flex items-center hover:text-gray-primary/80 py-1 gap-1"
+                    >
+                      <i className="fa-brands fa-github"></i>PR&apos;s
+                    </a>
                   </div>
                 </div>
                 <div className="text-sm group-hover:underline py-4">
@@ -973,8 +1051,8 @@ export default function Home() {
           </section>
         </div>
       </div>
-      <footer className="bg-[#141315]">
-        <div className="flex justify-center flex-col items-center py-24 gap-12">
+      <footer className="bg-[#141315] pt-24 pb-2">
+        <div className="flex justify-center flex-col items-center pb-12 gap-12">
           <h4 className="text-4xl pb-4">
             Impressed? <span className="text-primary">Let&apos;s talk</span>.
           </h4>
@@ -982,10 +1060,27 @@ export default function Home() {
             href="mailto: neilzoncviloria@gmail.com"
             className="rounded-full text-gray-primary bg-primary text-xs py-3 hover:bg-primary/80 px-4"
           >
-            Let&apos;s Chat!
+            Contact Me
           </a>
         </div>
-        <div className="flex justify-center">&#127464;&#127462;</div>
+        <div className="flex justify-center">
+          <a
+            href="https://github.com/neilZon"
+            target="_blank"
+            rel="noreferrer"
+            className="flex rounded-full justify-center items-center w-8 h-8 cursor-pointer hover:text-primary "
+          >
+            <i className="fa-brands fa-github"></i>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/neilzonv/"
+            target="_blank"
+            rel="noreferrer"
+            className="flex rounded-full justify-center items-center w-8 h-8 cursor-pointer hover:text-primary"
+          >
+            <i className="fa-brands fa-linkedin"></i>
+          </a>
+        </div>
       </footer>
     </div>
   );
