@@ -372,7 +372,84 @@ export default function Home() {
               <h3 className="text-3xl pb-4">
                 My <span className="text-primary">Experience</span>
               </h3>
-
+              <motion.div
+                className="border-l border-gray-tertiary py-10 pl-10 relative"
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true }}
+                variants={{
+                  offscreen: {
+                    opacity: 0,
+                  },
+                  onscreen: {
+                    transition: {
+                      type: 'linear',
+                      staggerChildren: 0.1,
+                    },
+                    opacity: 1,
+                  },
+                }}
+              >
+                <motion.div
+                  className="absolute -left-1 -top-2 flex items-center"
+                  variants={{
+                    offscreen: {
+                      opacity: 0,
+                      y: 100,
+                    },
+                    onscreen: {
+                      transition: {
+                        type: 'linear',
+                        duration: 0.3,
+                      },
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                >
+                  <div className="h-2 w-2 bg-gray-secondary rounded-full" />
+                  <div className="pl-10 text-sm text-gray-secondary">
+                    June 2023 - Present
+                  </div>
+                </motion.div>
+                <motion.div
+                  variants={{
+                    offscreen: {
+                      opacity: 0,
+                      y: 100,
+                    },
+                    onscreen: {
+                      transition: {
+                        type: 'linear',
+                        duration: 0.3,
+                      },
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                >
+                  PLACE
+                </motion.div>
+                <motion.div
+                  className="text-xs text-gray-secondary"
+                  variants={{
+                    offscreen: {
+                      opacity: 0,
+                      y: 100,
+                    },
+                    onscreen: {
+                      transition: {
+                        type: 'linear',
+                        duration: 0.3,
+                      },
+                      opacity: 1,
+                      y: 0,
+                    },
+                  }}
+                >
+                  Edmonton, Canada
+                </motion.div>
+              </motion.div>
               <motion.div
                 className="border-l border-gray-tertiary py-10 pl-10 relative"
                 initial="offscreen"
