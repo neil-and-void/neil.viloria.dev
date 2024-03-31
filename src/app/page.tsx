@@ -938,7 +938,7 @@ export default function Home() {
                       App Store
                     </a>
                     <a
-                      href="https://github.com/neilZon/until-failure-ios"
+                      href="https://github.com/neil-and-void/until-failure-ios"
                       target="_blank"
                       rel="noreferrer"
                       className="rounded-full bg-white text-gray-primary px-2 flex items-center hover:text-gray-primary/80 py-1 gap-1"
@@ -947,7 +947,7 @@ export default function Home() {
                       iOS
                     </a>
                     <a
-                      href="https://github.com/neilZon/until-failure-api"
+                      href="https://github.com/neil-and-void/until-failure-api"
                       target="_blank"
                       rel="noreferrer"
                       className="rounded-full bg-white text-gray-primary px-2 flex items-center hover:text-gray-primary/80 py-1 gap-1"
@@ -1142,7 +1142,7 @@ export default function Home() {
         </div>
         <div className="flex justify-center">
           <a
-            href="https://github.com/neilZon"
+            href="https://github.com/neil-and-void"
             target="_blank"
             rel="noreferrer"
             className="flex rounded-full justify-center items-center w-8 h-8 cursor-pointer hover:text-primary "

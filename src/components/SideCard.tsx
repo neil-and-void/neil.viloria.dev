@@ -44,7 +44,7 @@ const SideCard = () => {
 
         <div className="flex justify-center gap-2 text-sm text-gray-secondary pb-16">
           <a
-            href="https://github.com/neilZon"
+            href="https://github.com/neil-and-void"
             target="_blank"
             rel="noreferrer"
             className="flex rounded-full justify-center items-center border border-gray-tertiary w-8 h-8 cursor-pointer hover:text-primary hover:border-primary"
